@@ -154,9 +154,18 @@ export default function App() {
   const bootstrap = async () => {
     setLoading(true)
     try {
-      const [des, cli, weeks, ideiasList, tetosMap, nucleosList] = await Promise.all([
-        loadDesigners(), loadClients(), loadAllWeeks(), loadIdeias(), loadTetos(), loadNucleos()
+      const [des, cli, weeks, ideiasList, tetosMap] = await Promise.all([
+        loadDesigners(), loadClients(), loadAllWeeks(), loadIdeias(), loadTetos()
       ])
+
+      let nucleosList = DEFAULT_NUCLEOS
+      try {
+        const loadedNucleos = await loadNucleos()
+        if (loadedNucleos?.length) nucleosList = loadedNucleos
+      } catch (e) {
+        console.warn('Modo preview: tabela nucleos ainda nao existe.', e.message)
+      }
+
       const nucleosRows = nucleosList.length ? nucleosList : DEFAULT_NUCLEOS
       const defaultNucleoId = nucleosRows.find(n => n.nome === 'Núcleo B')?.id || nucleosRows[0]?.id || null
       const desRows = des.map(d => ({
