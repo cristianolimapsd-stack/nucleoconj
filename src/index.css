@@ -1,0 +1,59 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #8b2fe8 !important;
+  box-shadow: 0 0 0 2px #8b2fe822;
+}
+
+select option  { background: #141414; color: #ffffff; }
+optgroup       { color: #888888; font-style: normal; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #8b2fe844; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #8b2fe8aa; }
+
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
+
+.fade-in { animation: fadeUp .28s ease both; }
+.card-in { animation: fadeUp .22s ease both; }
+
+.rank-card:hover {
+  border-color: #8b2fe866 !important;
+  box-shadow: 0 0 20px #8b2fe811 !important;
+}
+.nav-item:hover {
+  background: #8b2fe811 !important;
+  color: #c084fc !important;
+}
+
+/* Light mode */
+body.light select option { background: #ffffff; color: #0a0a0a; }
+body.light { background: #fafafa; color: #0a0a0a; }
+body.light input:focus, body.light select:focus {
+  border-color: #8b2fe8 !important;
+  box-shadow: 0 0 0 2px #8b2fe81a;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  /* Remove hover effects que causam flicker no touch */
+  .rank-card:hover { border-color: inherit !important; box-shadow: none !important; }
+  .nav-item:hover  { background: transparent !important; color: inherit !important; }
+
+  /* Scrollbar invisível no mobile */
+  ::-webkit-scrollbar { width: 0; height: 0; }
+
+  /* Inputs e selects maiores para touch */
+  input, select { font-size: 16px !important; } /* evita zoom automático no iOS */
+}
